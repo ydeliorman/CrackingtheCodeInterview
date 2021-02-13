@@ -15,25 +15,33 @@ public class ArraysAndString {
                 {7, 8, 9},
         };
 
-        System.out.println(findUniqueChars("asyalin"));
+        int zeroMatrix[][] = {{1, 1, 2, 3, 4, 5}, {1, 1, 2, 3, 4, 5}, {1, 1, 2, 3, 4, 5}, {1, 1, 2, 3, 4, 5}, {1, 1, 0, 3, 4, 5}, {1, 1, 2, 3, 4, 5}};
 
-        System.out.println(checkPermutation("doge", "godf"));
+        System.out.println("findUniqueChars :" + findUniqueChars("asyalin"));
 
-        System.out.println(urlify("Mr John Smith", 13));
+        System.out.println("checkPermutation :" + checkPermutation("doge", "godf"));
 
-        System.out.println(palindromePermutation("abb"));
+        System.out.println("urlify :" + urlify("Mr John Smith", 13));
 
-        System.out.println(oneAway("pale", "plea"));
+        System.out.println("palindromePermutation :" + palindromePermutation("abb"));
 
-        System.out.println(compression("aabbcccaaa"));
+        System.out.println("oneAway :" + oneAway("pale", "plea"));
+
+        System.out.println("compression :" + compression("aabbcccaaa"));
 
         rotateMatrix(matrix2d);
 
+        System.out.println("rotateMatrix: ");
+
         printMatrix(matrix2d);
 
-//        System.out.println(zeroMatrix();
+        zeroMatrix(zeroMatrix);
 
-        System.out.println(stringRotation("waterbottle", " bottlewater"));
+        System.out.println("zeroMatrix: ");
+
+        printMatrix(zeroMatrix);
+
+        System.out.println("stringRotation :" + stringRotation("waterbottle", " bottlewater"));
     }
 
     //N time, N space
@@ -149,14 +157,12 @@ public class ArraysAndString {
         return resultString.toString();
     }
 
-    //TODO
+    //n2 time, n2 space
     public static int[][] rotateMatrix(int[][] a) {
         int N = a.length;
         for (int i = 0; i < N / 2; i++) {
             for (int j = i; j < N - i - 1; j++) {
 
-                // Swap elements of each cycle
-                // in clockwise direction
                 int temp = a[i][j];
                 a[i][j] = a[N - 1 - j][i];
                 a[N - 1 - j][i] = a[N - 1 - i][N - 1 - j];
@@ -168,21 +174,25 @@ public class ArraysAndString {
         return a;
     }
 
-    static void printMatrix(int arr[][]) {
-        int N = arr.length;
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++)
-                System.out.print(arr[i][j] + " ");
-            System.out.println();
-        }
-    }
-
-    //TODO
+    //n2 time, n2 space
     public static void zeroMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        boolean zeroM[] = new boolean[m];
+        boolean zeroN[] = new boolean[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    zeroM[i] = true;
+                    zeroN[j] = true;
+                }
+            }
+        }
 
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (zeroM[i] || zeroN[j])
+                    matrix[i][j] = 0;
             }
         }
     }
@@ -197,5 +207,16 @@ public class ArraysAndString {
         }
 
         return false;
+    }
+
+    //helper method
+    static void printMatrix(int arr[][]) {
+        int N = arr.length;
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++)
+                System.out.print(arr[i][j] + " ");
+            System.out.println();
+        }
     }
 }
