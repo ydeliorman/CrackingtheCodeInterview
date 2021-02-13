@@ -9,6 +9,12 @@ import java.util.Set;
 public class ArraysAndString {
 
     public static void main(String[] args) {
+        int[][] matrix2d = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9},
+        };
+
         System.out.println(findUniqueChars("asyalin"));
 
         System.out.println(checkPermutation("doge", "godf"));
@@ -17,9 +23,17 @@ public class ArraysAndString {
 
         System.out.println(palindromePermutation("abb"));
 
-        System.out.println(oneAway("pale", "ple"));
+        System.out.println(oneAway("pale", "plea"));
 
         System.out.println(compression("aabbcccaaa"));
+
+        rotateMatrix(matrix2d);
+
+        printMatrix(matrix2d);
+
+//        System.out.println(zeroMatrix();
+
+        System.out.println(stringRotation("waterbottle", " bottlewater"));
     }
 
     //N time, N space
@@ -136,13 +150,32 @@ public class ArraysAndString {
     }
 
     //TODO
-    public static void rotateMatrix(int[][] matrix) {
-        /*
-        1002
-        0000
-        0000
-        3004
-         */
+    public static int[][] rotateMatrix(int[][] a) {
+        int N = a.length;
+        for (int i = 0; i < N / 2; i++) {
+            for (int j = i; j < N - i - 1; j++) {
+
+                // Swap elements of each cycle
+                // in clockwise direction
+                int temp = a[i][j];
+                a[i][j] = a[N - 1 - j][i];
+                a[N - 1 - j][i] = a[N - 1 - i][N - 1 - j];
+                a[N - 1 - i][N - 1 - j] = a[j][N - 1 - i];
+                a[j][N - 1 - i] = temp;
+            }
+        }
+
+        return a;
+    }
+
+    static void printMatrix(int arr[][]) {
+        int N = arr.length;
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++)
+                System.out.print(arr[i][j] + " ");
+            System.out.println();
+        }
     }
 
     //TODO
