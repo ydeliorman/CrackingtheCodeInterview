@@ -174,7 +174,7 @@ public class ArraysAndString {
         return a;
     }
 
-    //n2 time, n2 space
+    //n2 time, n space
     public static void zeroMatrix(int[][] matrix) {
         int m = matrix.length;
         int n = matrix[0].length;
